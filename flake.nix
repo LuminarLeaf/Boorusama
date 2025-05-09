@@ -40,6 +40,11 @@
       # pubspecLock = lib.importJSON ./pubspec.lock.json;
       autoPubspecLock = src + "/pubspec.lock";
 
+      flutterBuildFlags = [
+        "--release"
+        "--dart-define-from-file env/foss.json"
+      ];
+
       buildPhase = ''
         runHook preBuild
 
