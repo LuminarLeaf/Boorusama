@@ -135,3 +135,6 @@ firebase_app_id_file.json
 # FVM Version Cache
 .fvm/
 .vscode/settings.json
+
+# Nix
+/result
