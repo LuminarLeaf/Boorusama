@@ -52,10 +52,6 @@ dependencies:
   expandable: ^5.0.1
   fast_immutable_collections: ^11.0.0
   file_picker: 8.1.4
-  firebase_analytics: ^11.3.5
-  firebase_core: ^3.8.0
-  firebase_crashlytics: ^4.1.5
-  firebase_performance: ^0.10.0+10
   fl_chart: ^0.69.0
   flutter:
     sdk: flutter
@@ -129,8 +125,8 @@ dependencies:
   visibility_detector: ^0.4.0+2
   webview_cookie_manager:
     git:
-       url: https://github.com/khoadng/webview_cookie_manager
-       ref: 8572dd54c437c919aedc8dca6c5bffd25fe74b3c
+      url: https://github.com/khoadng/webview_cookie_manager
+      ref: 8572dd54c437c919aedc8dca6c5bffd25fe74b3c
   webview_flutter: ^4.10.0
   webview_flutter_android: ^4.0.0
   window_manager: ^0.4.3
