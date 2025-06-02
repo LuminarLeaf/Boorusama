@@ -1,0 +1,49 @@
+name: Build apk
+
+on:
+  push:
+    tags:
+      - "v*-foss"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "21"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.27.4
+          cache: true
+
+      - name: Build apk
+        run: |
+          sed -i 's/signingConfig = signingConfigs.release//g' android/app/build.gradle
+          flutter build apk --flavor prod --dart-define-from-file env/prod.json
+          mv build/app/outputs/flutter-apk/*.apk Boorusama-foss.apk
+
+      - name: Upload APKs as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: apk-artifacts
+          path: Boorusama-foss.apk
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          name: ${{ github.ref_name }}
+          body: ""
+          draft: true
+          files: Boorusama-foss.apk
