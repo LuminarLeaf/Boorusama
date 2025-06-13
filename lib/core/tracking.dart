@@ -2,7 +2,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Project imports:
-import 'firebase.dart';
 import 'foundation/errors/handlers.dart';
 import 'foundation/loggers.dart';
 import 'settings/providers.dart';
@@ -12,17 +11,11 @@ import 'tracking/types.dart';
 Future<Tracker> initializeTracking(
   Settings settings, {
   Logger? logger,
-}) =>
-    FirebaseTracker.initialize(
-      settings: settings,
-      logger: logger,
-    );
+}) async =>
+    new DummyTracker();
 
 final trackerProvider = FutureProvider<Tracker>((ref) async {
-  final tracker = await FirebaseTracker.initialize(
-    settings: ref.watch(initialSettingsProvider),
-    logger: ref.watch(loggerProvider),
-  );
+  final tracker = new DummyTracker();
 
   initializeErrorHandlers(tracker.reporter);
 
